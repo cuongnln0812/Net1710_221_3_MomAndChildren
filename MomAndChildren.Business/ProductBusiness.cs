@@ -27,34 +27,59 @@ namespace MomAndChildren.Business
             _context = context;
         }
 
-        public Task<IMomAndChildrenResult> CreateProduct(Product product)
+        public async Task<IMomAndChildrenResult> CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            if (_context.Products.Any(p => p.ProductId == product.ProductId))
+            {
+                return new MomAndChildrenResult(-1, "Product id is duplicate");
+            }
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+            return new MomAndChildrenResult(1, "Create product success", product);
         }
 
         public Task<IMomAndChildrenResult> DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            Product product = _context.Products.Find(productId);
+            if (product == null)
+            {
+                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(-1, "Product not found"));
+            }else
+            {
+                _context.Products.Remove(product);
+                _context.SaveChanges();
+                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Delete product success"));
+            }
         }
 
         public Task<IMomAndChildrenResult> GetProductByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            Product product = _context.Products.Find(id);
+            if (product == null)
+            {
+                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(-1, "Product not found"));
+            }else
+            {
+                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Get product success", product));
+            }
         }
 
         public Task<IMomAndChildrenResult> GetProductsAsync()
         {
-            throw new NotImplementedException();
+            List<Product> products = _context.Products.ToList();
+            return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Get products success", products));
         }
 
         public bool ProductExists(int id)
         {
-            throw new NotImplementedException();
+            return _context.Products.Any(e => e.ProductId == id);
         }
 
         public Task<IMomAndChildrenResult> UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            _context.Products.Update(product);
+            _context.SaveChanges();
+            return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Update product success", product));
         }
     }
 }
