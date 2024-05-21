@@ -12,3 +12,4 @@ D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildr
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.Data\obj\Debug\net7.0\MomAndChildren.Data.pdb
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.Data\obj\Debug\net7.0\MomAndChildren.Data.genruntimeconfig.cache
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.Data\obj\Debug\net7.0\ref\MomAndChildren.Data.dll
+D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.Data\obj\Debug\net7.0\MomAndChildren.Data.sourcelink.json
