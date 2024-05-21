@@ -49,23 +49,23 @@ namespace MomAndChildren.Business
             return new MomAndChildrenResult(1, "Create OrderDetails Successfully!");
         }
 
-        public Task<IMomAndChildrenResult> GetOrderDetailByIdAsync(int orderDetailId)
+        public async Task<IMomAndChildrenResult> GetOrderDetailByIdAsync(int orderDetailId)
         {
-            OrderDetail? orderDetail = _context.OrderDetails.Find(orderDetailId);
+            OrderDetail? orderDetail = await _context.OrderDetails.FindAsync(orderDetailId);
             if (orderDetail == null)
             {
-                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(-1, "OrderDetail not found"));
+                return new MomAndChildrenResult(-1, "OrderDetail not found");
             }
             else
             {
-                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Get OrderDetail success", orderDetail));
+                return new MomAndChildrenResult(1, "Get OrderDetail success", orderDetail);
             }
         }
 
-        public Task<IMomAndChildrenResult> GetOrderDetailsAsync()
+        public async Task<IMomAndChildrenResult> GetOrderDetailsAsync()
         {
-            IEnumerable<OrderDetail> orderDetails = _context.OrderDetails.OrderByDescending(x => x.OrderDetailId);
-            return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Get OrderDetails success", orderDetails));
+            var orderDetails = await _context.OrderDetails.OrderByDescending(x => x.OrderId).ToListAsync();
+            return new MomAndChildrenResult(1, "Get OrderDetails success", orderDetails);
         }
     }
 }
