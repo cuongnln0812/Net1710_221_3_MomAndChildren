@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MomAndChildren.Common;
+using MomAndChildren.Data.DAO;
 using MomAndChildren.Data.Models;
 using MomAndChildren.Data.Models.DTO;
 using System;
@@ -19,9 +21,11 @@ namespace MomAndChildren.Business
     public class OrderDetailBusiness : IOrderDetailBusiness
     {
         private readonly Net1710_221_3_MomAndChildrenContext _context;
+        private readonly OrderDetailDAO _DAO;
 
-        public OrderDetailBusiness(Net1710_221_3_MomAndChildrenContext context)
+        public OrderDetailBusiness(Net1710_221_3_MomAndChildrenContext context=)
         {
+            _DAO = new OrderDetailDAO();
             _context = context;
         }
 
@@ -44,28 +48,28 @@ namespace MomAndChildren.Business
                 };
                 orderDetails.Add(orderDetail);
             }
-            await _context.OrderDetails.AddRangeAsync(orderDetails);
-            await _context.SaveChangesAsync();
-            return new MomAndChildrenResult(1, "Create OrderDetails Successfully!");
+            await _DAO.CreateOrderDetail(orderDetails);
+            return new MomAndChildrenResult(Const.SUCCESS_CREATE_CODE, Const.SUCCESS_CREATE_MSG);
         }
 
         public async Task<IMomAndChildrenResult> GetOrderDetailByIdAsync(int orderDetailId)
         {
-            OrderDetail? orderDetail = await _context.OrderDetails.FindAsync(orderDetailId);
+            OrderDetail? orderDetail = await _DAO.GetByIdAsync(orderDetailId);
             if (orderDetail == null)
             {
-                return new MomAndChildrenResult(-1, "OrderDetail not found");
+                return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.FAIL_READ_MSG);
             }
             else
             {
-                return new MomAndChildrenResult(1, "Get OrderDetail success", orderDetail);
+                return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orderDetail);
             }
         }
 
         public async Task<IMomAndChildrenResult> GetOrderDetailsAsync()
         {
-            var orderDetails = await _context.OrderDetails.OrderByDescending(x => x.OrderId).ToListAsync();
-            return new MomAndChildrenResult(1, "Get OrderDetails success", orderDetails);
+            var orderDetails = await _DAO.GetAllAsync();
+            return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orderDetails);
+
         }
     }
 }

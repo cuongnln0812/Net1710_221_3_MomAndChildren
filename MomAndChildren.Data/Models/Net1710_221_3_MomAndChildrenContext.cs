@@ -8,6 +8,10 @@ namespace MomAndChildren.Data.Models;
 
 public partial class Net1710_221_3_MomAndChildrenContext : DbContext
 {
+    public Net1710_221_3_MomAndChildrenContext()
+    {
+    }
+
     public Net1710_221_3_MomAndChildrenContext(DbContextOptions<Net1710_221_3_MomAndChildrenContext> options)
         : base(options)
     {
