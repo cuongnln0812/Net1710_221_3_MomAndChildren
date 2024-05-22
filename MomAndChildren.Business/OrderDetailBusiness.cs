@@ -23,10 +23,10 @@ namespace MomAndChildren.Business
         private readonly Net1710_221_3_MomAndChildrenContext _context;
         private readonly OrderDetailDAO _DAO;
 
-        public OrderDetailBusiness(Net1710_221_3_MomAndChildrenContext context=)
+        public OrderDetailBusiness(Net1710_221_3_MomAndChildrenContext context, OrderDetailDAO dao)
         {
-            _DAO = new OrderDetailDAO();
             _context = context;
+            _DAO = dao;
         }
 
         public async Task<IMomAndChildrenResult> CreateOrderDetail(int orderId, List<ProductCart> products)
