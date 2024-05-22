@@ -3,7 +3,6 @@ using MomAndChildren.Data.Models;
 
 namespace MomAndChildren.Business
 {
-
     public interface IPaymentHistoryBusiness
     {
         Task<IMomAndChildrenResult> GetPaymentHistoryListAsync();
@@ -42,7 +41,7 @@ namespace MomAndChildren.Business
             {
                 return new MomAndChildrenResult(0, "Payment method: " + method + " not available");
             }
-            _context.PaymentHistories.Add(paymentHistory);
+            await _context.PaymentHistories.AddAsync(paymentHistory);
             await _context.SaveChangesAsync();
 
             return new MomAndChildrenResult(1, "Payment completed", paymentHistory);
@@ -57,7 +56,7 @@ namespace MomAndChildren.Business
 
         public async Task<IMomAndChildrenResult> GetPaymentHistoryListAsync()
         {
-            var paymentList = await _context.PaymentHistories.ToListAsync();
+            var paymentList = await _context.PaymentHistories.OrderByDescending(x => x.PaymentId).ToListAsync();
             return new MomAndChildrenResult(1, "Retrieve Payment list successfully", paymentList);
         }
 
@@ -69,6 +68,7 @@ namespace MomAndChildren.Business
             {
                 payment.Status = status;
                 payment.Status = status;
+                payment.PurchaseDate = DateTime.Now;
                 _context.PaymentHistories.Update(payment);
                 await _context.SaveChangesAsync();
             }
