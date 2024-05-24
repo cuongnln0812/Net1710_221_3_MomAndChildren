@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eUV5DlzfVvT3+bxLxtYxfdP9uqyYPgCE/GQk4U9oqV7v7BLrUboZ0HcbHPAEreyWazsMzZrq+rBxL9qT5Odfyw==",
+  "dgSpecHash": "CfdwJ4KPGteQilSJ3bfbyJWIXbWQ7PkCnT40U/7GAInoKdXIO2Mrwmi7TEOevOqJjG2h/nlFjYnxdhZSvcEiXw==",
   "success": true,
-  "projectFilePath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Business\\MomAndChildren.Business.csproj",
+  "projectFilePath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.ConsoleApp\\MomAndChildren.ConsoleApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Henry\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Henry\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

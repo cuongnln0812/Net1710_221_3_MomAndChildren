@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MomAndChildren.Common\MomAndChildren.Common.csproj" />
     <ProjectReference Include="..\MomAndChildren.Data\MomAndChildren.Data.csproj" />
   </ItemGroup>
 

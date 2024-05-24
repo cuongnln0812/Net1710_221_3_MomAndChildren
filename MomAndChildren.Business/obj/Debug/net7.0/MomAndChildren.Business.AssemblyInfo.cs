@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MomAndChildren.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85dd4bcf58b8f744fbe9180913fb81fce01f3193")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c963c4a4a6ce4deb786f3f21006d1ff0e26f1f94")]
 [assembly: System.Reflection.AssemblyProductAttribute("MomAndChildren.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MomAndChildren.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

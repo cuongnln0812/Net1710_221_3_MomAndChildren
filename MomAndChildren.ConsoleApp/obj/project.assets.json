@@ -1387,6 +1387,20 @@
           }
         }
       },
+      "MomAndChildren.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "MomAndChildren.Common": "1.0.0",
+          "MomAndChildren.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MomAndChildren.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MomAndChildren.Business.dll": {}
+        }
+      },
       "MomAndChildren.Common/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -3580,6 +3594,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "MomAndChildren.Business/1.0.0": {
+      "type": "project",
+      "path": "../MomAndChildren.Business/MomAndChildren.Business.csproj",
+      "msbuildProject": "../MomAndChildren.Business/MomAndChildren.Business.csproj"
+    },
     "MomAndChildren.Common/1.0.0": {
       "type": "project",
       "path": "../MomAndChildren.Common/MomAndChildren.Common.csproj",
@@ -3593,8 +3612,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "MomAndChildren.Common >= 1.0.0",
-      "MomAndChildren.Data >= 1.0.0"
+      "MomAndChildren.Business >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3603,11 +3621,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Business\\MomAndChildren.Business.csproj",
-      "projectName": "MomAndChildren.Business",
-      "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Business\\MomAndChildren.Business.csproj",
+      "projectUniqueName": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.ConsoleApp\\MomAndChildren.ConsoleApp.csproj",
+      "projectName": "MomAndChildren.ConsoleApp",
+      "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.ConsoleApp\\MomAndChildren.ConsoleApp.csproj",
       "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
-      "outputPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Business\\obj\\",
+      "outputPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.ConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3624,11 +3642,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj": {
-              "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj"
-            },
-            "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj": {
-              "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj"
+            "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Business\\MomAndChildren.Business.csproj": {
+              "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Business\\MomAndChildren.Business.csproj"
             }
           }
         }
