@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Henry\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.RazorWebApp\\MomAndChildren.RazorWebApp.csproj",
+      "projectUniqueName": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.RazorWebApp\\MomAndChildren.RazorWebApp.csproj",
       "projectName": "MomAndChildren.RazorWebApp",
-      "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.RazorWebApp\\MomAndChildren.RazorWebApp.csproj",
-      "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
-      "outputPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.RazorWebApp\\obj\\",
+      "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.RazorWebApp\\MomAndChildren.RazorWebApp.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.RazorWebApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -40,11 +40,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -69,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\7.0.409\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj": {}
+    "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj": {}
   },
   "projects": {
-    "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj": {
+    "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj",
+        "projectUniqueName": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj",
         "projectName": "MomAndChildren.Data",
-        "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj",
-        "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
-        "outputPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\obj\\",
+        "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,28 +34,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "EfCore.SchemaCompare": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
             "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.19, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.19, )"
             },
@@ -86,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\7.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     }

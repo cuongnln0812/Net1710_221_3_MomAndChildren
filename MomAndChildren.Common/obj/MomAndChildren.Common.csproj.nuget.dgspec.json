@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj": {}
+    "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj": {}
   },
   "projects": {
-    "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj": {
+    "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj",
+        "projectUniqueName": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj",
         "projectName": "MomAndChildren.Common",
-        "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj",
-        "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
-        "outputPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\obj\\",
+        "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -60,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\7.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     }

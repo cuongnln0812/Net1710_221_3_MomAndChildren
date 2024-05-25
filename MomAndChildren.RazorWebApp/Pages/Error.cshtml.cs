@@ -24,5 +24,4 @@ namespace MomAndChildren.RazorWebApp.Pages
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
     }
-
 }

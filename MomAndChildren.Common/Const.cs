@@ -1,4 +1,10 @@
-﻿namespace MomAndChildren.Common
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MomAndChildren.Common
 {
     public class Const
     {
@@ -42,5 +48,6 @@
         public static string WARNING_NO_DATA__MSG = "No data";
 
         #endregion
+
     }
 }

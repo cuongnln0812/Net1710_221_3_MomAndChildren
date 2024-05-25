@@ -13,13 +13,13 @@ D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildr
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\MomAndChildren.RazorWebApp.MvcApplicationPartsAssemblyInfo.cache
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\MomAndChildren.RazorWebApp.RazorAssemblyInfo.cache
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\MomAndChildren.RazorWebApp.RazorAssemblyInfo.cs
-D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\staticwebassets.build.json
-D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\staticwebassets.development.json
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\staticwebassets\msbuild.MomAndChildren.RazorWebApp.Microsoft.AspNetCore.StaticWebAssets.props
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\staticwebassets\msbuild.build.MomAndChildren.RazorWebApp.props
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.MomAndChildren.RazorWebApp.props
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.MomAndChildren.RazorWebApp.props
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\staticwebassets.pack.json
+D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\staticwebassets.build.json
+D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\staticwebassets.development.json
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\scopedcss\bundle\MomAndChildren.RazorWebApp.styles.css
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\scopedcss\projectbundle\MomAndChildren.RazorWebApp.bundle.scp.css
@@ -28,4 +28,3 @@ D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildr
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\MomAndChildren.RazorWebApp.pdb
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\MomAndChildren.RazorWebApp.genruntimeconfig.cache
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\ref\MomAndChildren.RazorWebApp.dll
-D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\MomAndChildren.RazorWebApp.sourcelink.json
