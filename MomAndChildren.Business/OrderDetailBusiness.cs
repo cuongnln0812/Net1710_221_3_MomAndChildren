@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MomAndChildren.Common;
+using MomAndChildren.Data;
 using MomAndChildren.Data.DAO;
 using MomAndChildren.Data.Models;
 using MomAndChildren.Data.Models.DTO;
@@ -20,13 +21,13 @@ namespace MomAndChildren.Business
 
     public class OrderDetailBusiness : IOrderDetailBusiness
     {
-        private readonly Net1710_221_3_MomAndChildrenContext _context;
-        private readonly OrderDetailDAO _DAO;
+        //private readonly Net1710_221_3_MomAndChildrenContext _context;
+        //private readonly OrderDetailDAO _DAO;
+        private readonly UnitOfWork _unitOfWork;
 
-        public OrderDetailBusiness(Net1710_221_3_MomAndChildrenContext context, OrderDetailDAO dao)
+        public OrderDetailBusiness()
         {
-            _context = context;
-            _DAO = dao;
+            _unitOfWork ??= new UnitOfWork();
         }
 
         public async Task<IMomAndChildrenResult> CreateOrderDetail(int orderId, List<ProductCart> products)
@@ -48,13 +49,13 @@ namespace MomAndChildren.Business
                 };
                 orderDetails.Add(orderDetail);
             }
-            await _DAO.CreateOrderDetail(orderDetails);
+            await _unitOfWork.OrderDetailRepository.CreateListAsync(orderDetails);
             return new MomAndChildrenResult(Const.SUCCESS_CREATE_CODE, Const.SUCCESS_CREATE_MSG);
         }
 
         public async Task<IMomAndChildrenResult> GetOrderDetailByIdAsync(int orderDetailId)
         {
-            OrderDetail? orderDetail = await _DAO.GetByIdAsync(orderDetailId);
+            OrderDetail? orderDetail = await _unitOfWork.OrderDetailRepository.GetByIdAsync(orderDetailId);
             if (orderDetail == null)
             {
                 return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.FAIL_READ_MSG);
@@ -67,7 +68,7 @@ namespace MomAndChildren.Business
 
         public async Task<IMomAndChildrenResult> GetOrderDetailsAsync()
         {
-            var orderDetails = await _DAO.GetAllAsync();
+            var orderDetails = await _unitOfWork.OrderDetailRepository.GetAllAsync();
             return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orderDetails);
 
         }
