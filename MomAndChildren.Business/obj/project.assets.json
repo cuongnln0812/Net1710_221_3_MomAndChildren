@@ -1387,6 +1387,16 @@
           }
         }
       },
+      "MomAndChildren.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/MomAndChildren.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MomAndChildren.Common.dll": {}
+        }
+      },
       "MomAndChildren.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -3570,6 +3580,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "MomAndChildren.Common/1.0.0": {
+      "type": "project",
+      "path": "../MomAndChildren.Common/MomAndChildren.Common.csproj",
+      "msbuildProject": "../MomAndChildren.Common/MomAndChildren.Common.csproj"
+    },
     "MomAndChildren.Data/1.0.0": {
       "type": "project",
       "path": "../MomAndChildren.Data/MomAndChildren.Data.csproj",
@@ -3578,6 +3593,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "MomAndChildren.Common >= 1.0.0",
       "MomAndChildren.Data >= 1.0.0"
     ]
   },
@@ -3608,6 +3624,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj": {
+              "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Common\\MomAndChildren.Common.csproj"
+            },
             "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj": {
               "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj"
             }
