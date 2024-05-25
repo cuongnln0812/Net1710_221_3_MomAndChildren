@@ -1,4 +1,5 @@
-﻿using MomAndChildren.Data.Models;
+﻿using MomAndChildren.Data;
+using MomAndChildren.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,21 +21,21 @@ namespace MomAndChildren.Business
 
     public class ProductBusiness : IProductBusiness
     {
-        private readonly Net1710_221_3_MomAndChildrenContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public ProductBusiness(Net1710_221_3_MomAndChildrenContext context)
+        public ProductBusiness()
         {
-            _context = context;
+            _unitOfWork ??= new UnitOfWork();
         }
 
         public async Task<IMomAndChildrenResult> CreateProduct(Product product)
         {
-            if (_context.Products.Any(p => p.ProductId == product.ProductId))
+            if (_unitOfWork.ProductRepository.GetAll().Any(p => p.ProductId == product.ProductId))
             {
                 return new MomAndChildrenResult(-1, "Product id is duplicate");
             }
-            await _context.Products.AddAsync(product);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.ProductRepository.CreateAsync(product);
+            await _unitOfWork.ProductRepository.SaveAsync();
             return new MomAndChildrenResult(1, "Create product success", product);
         }
 
