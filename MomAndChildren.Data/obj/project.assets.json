@@ -3728,8 +3728,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nguye\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Henry\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -3737,15 +3736,11 @@
       "projectUniqueName": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj",
       "projectName": "MomAndChildren.Data",
       "projectPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\MomAndChildren.Data.csproj",
-      "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
       "outputPath": "D:\\PRN221\\Project\\Net1710_221_3_MomAndChildren\\Source\\Net1710_221_3_MomAndChildren\\MomAndChildren.Data\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3753,7 +3748,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3766,6 +3760,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3813,7 +3812,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
       }
     }
   }
