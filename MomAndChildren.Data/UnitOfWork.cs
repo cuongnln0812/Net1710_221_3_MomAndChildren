@@ -16,6 +16,8 @@ namespace MomAndChildren.Data
 
         private ProductRepository _product;
 
+        private BrandRepository _brand;
+
         public UnitOfWork() { }
 
         public CategoryRepository CategoryRepository
@@ -26,6 +28,11 @@ namespace MomAndChildren.Data
         public ProductRepository ProductRepository
         {
             get { return _product ??= new Repository.ProductRepository(); }
+        }
+
+        public BrandRepository BrandRepository
+        {
+            get { return _brand ??= new Repository.BrandRepository(); }
         }
     }
 }

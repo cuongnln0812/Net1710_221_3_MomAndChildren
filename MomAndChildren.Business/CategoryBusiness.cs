@@ -129,18 +129,25 @@ namespace MomAndChildren.Business
                     else
                     {
                         category.Status = 0;
-                        await _CategoryDAO.UpdateAsync(category);
-                        return new MomAndChildrenResult(1, "Category is inactive");
+                        int result = await _unitOfWork.CategoryRepository.UpdateAsync(category);
+                        if (result > 0)
+                        {
+                            return new MomAndChildrenResult(Const.SUCCESS_UPDATE_CODE, "Category is inactive");
+                        }
+                        else
+                        {
+                            return new MomAndChildrenResult(Const.FAIL_UPDATE_CODE, Const.FAIL_UPDATE_MSG);
+                        }
                     }
                 }
                 else
                 {
-                    return new MomAndChildrenResult(-1, "Category is not exist");
+                    return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
                 }
             }
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(-1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
 
@@ -148,20 +155,20 @@ namespace MomAndChildren.Business
         {
             try
             {
-                var categories = await _CategoryDAO.GetAllAsync();
+                var categories = await _unitOfWork.CategoryRepository.GetAllAsync();
 
                 if (categories == null)
                 {
-                    return new MomAndChildrenResult(-1, "Get category list fail");
+                    return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.FAIL_READ_MSG);
                 }
                 else
                 {
-                    return new MomAndChildrenResult(1, "Get category list successfully", categories);
+                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, categories);
                 }
             } 
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
 
@@ -169,19 +176,19 @@ namespace MomAndChildren.Business
         {
             try
             {
-                var category = await _CategoryDAO.GetByIdAsync(categoryId);
+                var category = await _unitOfWork.CategoryRepository.GetByIdAsync(categoryId);
                 if (category == null)
                 {
-                    return new MomAndChildrenResult(-1, "Category is not exist");
+                    return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.FAIL_READ_MSG);
                 }
                 else
                 {
-                    return new MomAndChildrenResult(1, "Get category success", category);
+                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, category);
                 }
             }
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(-1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
 
@@ -189,22 +196,29 @@ namespace MomAndChildren.Business
         {
             try
             {
-                var newCategory = await _CategoryDAO.GetByIdAsync(category.CategoryId);
+                var newCategory = await _unitOfWork.CategoryRepository.GetByIdAsync(category.CategoryId);
                 if (newCategory != null)
                 {        
                     newCategory.CategoryName = category.CategoryName;
                     //newCategory.Status = category.Status;
-                    await _CategoryDAO.UpdateAsync(newCategory);
-                    return new MomAndChildrenResult(1, "Update category success");
+                    int result = await _unitOfWork.CategoryRepository.UpdateAsync(newCategory);
+                    if (result > 0)
+                    {
+                        return new MomAndChildrenResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG);
+                    }
+                    else
+                    {
+                        return new MomAndChildrenResult(Const.FAIL_UPDATE_CODE, Const.FAIL_UPDATE_MSG);
+                    }                   
                 }
                 else
                 {
-                    return new MomAndChildrenResult(-1, "Category is not exist");
+                    return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
                 }
             }
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(-1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
     }

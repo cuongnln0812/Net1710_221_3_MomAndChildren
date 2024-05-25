@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MomAndChildren.Common;
+using MomAndChildren.Data;
 using MomAndChildren.Data.DAO;
 using MomAndChildren.Data.Models;
 using System;
@@ -21,13 +23,15 @@ namespace MomAndChildren.Business
 
     public class BrandBusiness : IBrandBusiness
     {
-        private readonly BrandDAO _BrandDAO;
-        private readonly ProductDAO _ProductDAO;
+        //private readonly BrandDAO _BrandDAO;
+        //private readonly ProductDAO _ProductDAO;
+        private readonly UnitOfWork _unitOfWork;
 
         public BrandBusiness()
         {
-            _BrandDAO = new BrandDAO();
-            _ProductDAO = new ProductDAO();
+            //_BrandDAO = new BrandDAO();
+            //_ProductDAO = new ProductDAO();
+            _unitOfWork ??= new UnitOfWork();
         }
 
         public async Task<IMomAndChildrenResult> CreateBrand(Brand brand)
@@ -35,22 +39,28 @@ namespace MomAndChildren.Business
             try
             {
                 //check trung ten
-                var brands = await _BrandDAO.GetAllAsync();
+                var brands = await _unitOfWork.BrandRepository.GetAllAsync();
                 foreach (var item in brands)
                 {
                     if (brand.BrandName.Equals(item.BrandName))
                     {
-                        return new MomAndChildrenResult(-1, "Name is duplicated.");
+                        return new MomAndChildrenResult(Const.ERROR_EXCEPTION, "Name is duplicated.");
                     }
                 }
                 brand.Status = 1;
-                await _BrandDAO.CreateAsync(brand);
-
-                return new MomAndChildrenResult(1, "Create the brand successfully");
+                int result = await _unitOfWork.BrandRepository.CreateAsync(brand);
+                if (result > 0)
+                {
+                    return new MomAndChildrenResult(Const.SUCCESS_CREATE_CODE, Const.SUCCESS_CREATE_MSG);
+                }
+                else
+                {
+                    return new MomAndChildrenResult(Const.FAIL_CREATE_CODE, Const.FAIL_CREATE_MSG);
+                }
             }
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(-1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
 
         }
@@ -59,30 +69,36 @@ namespace MomAndChildren.Business
         {
             try
             {
-                var brand = await _BrandDAO.GetByIdAsync(brandId);
+                var brand = await _unitOfWork.BrandRepository.GetByIdAsync(brandId);
                 if (brand != null)
                 {
                     //xem bang product co brand muon xóa ko, có -> thì ko cho xóa; ko có -> chuyển status
-                    var products = await _ProductDAO.GetAllAsync();
+                    var products = await _unitOfWork.ProductRepository.GetAllAsync();
                     foreach (var product in products)
                     {
                         if (brandId == product.Category.CategoryId)
                         {
-                            return new MomAndChildrenResult(-1, "Brand is using");
+                            return new MomAndChildrenResult(Const.ERROR_EXCEPTION, "Brand is using");
                         }
                     }
-                    brand.Status = 0;
-                    await _BrandDAO.UpdateAsync(brand);
-                    return new MomAndChildrenResult(1, "Brand is inactive");
+                    bool result = await _unitOfWork.BrandRepository.RemoveAsync(brand);
+                    if (result)
+                    {
+                        return new MomAndChildrenResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG);
+                    }
+                    else
+                    {
+                        return new MomAndChildrenResult(Const.FAIL_DELETE_CODE, Const.FAIL_DELETE_MSG);
+                    }
                 }
                 else
                 {
-                    return new MomAndChildrenResult(-1, "Brand is not exist");
+                    return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
                 }
             }
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(-1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
 
@@ -90,30 +106,44 @@ namespace MomAndChildren.Business
         {
             try
             {
-                var brand = await _BrandDAO.GetByIdAsync(brandId);
+                var brand = await _unitOfWork.BrandRepository.GetByIdAsync(brandId);
                 if (brand != null)
                 {
                     if (brand.Status == 0)
                     {
                         brand.Status = 1;
-                        await _BrandDAO.UpdateAsync(brand);
-                        return new MomAndChildrenResult(1, "Brand is active");
+                        int result = await _unitOfWork.BrandRepository.UpdateAsync(brand);
+                        if (result > 0)
+                        {
+                            return new MomAndChildrenResult(Const.SUCCESS_UPDATE_CODE, "Brand is active");
+                        }
+                        else
+                        {
+                            return new MomAndChildrenResult(Const.FAIL_UPDATE_CODE, Const.FAIL_UPDATE_MSG);
+                        }
                     }
                     else
                     {
                         brand.Status = 0;
-                        await _BrandDAO.UpdateAsync(brand);
-                        return new MomAndChildrenResult(1, "Brand is inactive");
+                        int result = await _unitOfWork.BrandRepository.UpdateAsync(brand);
+                        if (result > 0)
+                        {
+                            return new MomAndChildrenResult(Const.SUCCESS_UPDATE_CODE, "Brand is inactive");
+                        }
+                        else
+                        {
+                            return new MomAndChildrenResult(Const.FAIL_UPDATE_CODE, Const.FAIL_UPDATE_MSG);
+                        }
                     }
                 }
                 else
                 {
-                    return new MomAndChildrenResult(-1, "Brand is not exist");
+                    return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
                 }
             }
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(-1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
 
@@ -121,20 +151,20 @@ namespace MomAndChildren.Business
         {
             try
             {
-                var brands = await _BrandDAO.GetAllAsync();
+                var brands = await _unitOfWork.BrandRepository.GetAllAsync();
 
                 if (brands == null)
                 {
-                    return new MomAndChildrenResult(-1, "Get brand list fail");
+                    return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.FAIL_READ_MSG);
                 }
                 else
                 {
-                    return new MomAndChildrenResult(1, "Get brand list successfully", brands);
+                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, brands);
                 }
             }
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
 
@@ -142,19 +172,19 @@ namespace MomAndChildren.Business
         {
             try
             {
-                var brand = await _BrandDAO.GetByIdAsync(brandId);
+                var brand = await _unitOfWork.BrandRepository.GetByIdAsync(brandId);
                 if (brand == null)
                 {
-                    return new MomAndChildrenResult(-1, "Brand is not exist");
+                    return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.FAIL_READ_MSG);
                 }
                 else
                 {
-                    return new MomAndChildrenResult(1, "Get brand success", brand);
+                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, brand);
                 }
             }
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(-1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
 
@@ -162,21 +192,28 @@ namespace MomAndChildren.Business
         {
             try
             {
-                var newBrand = await _BrandDAO.GetByIdAsync(brand.BrandId);
+                var newBrand = await _unitOfWork.BrandRepository.GetByIdAsync(brand.BrandId);
                 if (newBrand != null)
                 {
                     newBrand.BrandName = brand.BrandName;
-                    await _BrandDAO.UpdateAsync(newBrand);
-                    return new MomAndChildrenResult(1, "Update brand success");
+                    int result = await _unitOfWork.BrandRepository.UpdateAsync(newBrand);
+                    if (result > 0)
+                    {
+                        return new MomAndChildrenResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG);
+                    }
+                    else
+                    {
+                        return new MomAndChildrenResult(Const.FAIL_UPDATE_CODE, Const.FAIL_UPDATE_MSG);
+                    }
                 }
                 else
                 {
-                    return new MomAndChildrenResult(-1, "Brand is not exist");
+                    return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
                 }
             }
             catch (Exception ex)
             {
-                return new MomAndChildrenResult(-1, ex.Message);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
     }
