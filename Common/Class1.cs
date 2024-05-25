@@ -1,4 +1,4 @@
-﻿namespace MomAndChildren.Business
+﻿namespace Common
 {
     public class Class1
     {
