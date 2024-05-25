@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomAndChildren.Data", "MomAndChildren.Data\MomAndChildren.Data.csproj", "{75295686-18FD-445D-8BED-AA03794DFEC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MomAndChildren.Data", "MomAndChildren.Data\MomAndChildren.Data.csproj", "{75295686-18FD-445D-8BED-AA03794DFEC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomAndChildren.Business", "MomAndChildren.Business\MomAndChildren.Business.csproj", "{EB5BC29C-1ECF-4FAB-BFD9-230E11DC76D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MomAndChildren.Business", "MomAndChildren.Business\MomAndChildren.Business.csproj", "{EB5BC29C-1ECF-4FAB-BFD9-230E11DC76D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomAndChildren.RazorWebApp", "MomAndChildren.RazorWebApp\MomAndChildren.RazorWebApp.csproj", "{70BFFBB4-2472-4044-A81E-53DD2668FF4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MomAndChildren.RazorWebApp", "MomAndChildren.RazorWebApp\MomAndChildren.RazorWebApp.csproj", "{70BFFBB4-2472-4044-A81E-53DD2668FF4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomAndChildren.ConsoleApp", "ConsoleApp\MomAndChildren.ConsoleApp.csproj", "{54ACA754-494E-4531-9482-0A6D2543073B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{70BFFBB4-2472-4044-A81E-53DD2668FF4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70BFFBB4-2472-4044-A81E-53DD2668FF4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70BFFBB4-2472-4044-A81E-53DD2668FF4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54ACA754-494E-4531-9482-0A6D2543073B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54ACA754-494E-4531-9482-0A6D2543073B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54ACA754-494E-4531-9482-0A6D2543073B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54ACA754-494E-4531-9482-0A6D2543073B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
