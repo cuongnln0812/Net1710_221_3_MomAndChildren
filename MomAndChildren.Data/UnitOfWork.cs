@@ -8,13 +8,19 @@ using System.Threading.Tasks;
 
 namespace MomAndChildren.Data
 {
-     public class UnitOfWork
+    public class UnitOfWork
     {
         private Net1710_221_3_MomAndChildrenContext _unitOfWorkContext;
 
+        private OrderDetailRepository _orderDetail;
         private ProductRepository _productRepo;
 
         public UnitOfWork() { }
+
+        //public OrderDetailRepository OrderDetailRepository
+        //{
+        //        return _orderDetail ??= new Repositories.OrderDetailRepository(); 
+        //}
 
         public ProductRepository ProductRepository
         { 
