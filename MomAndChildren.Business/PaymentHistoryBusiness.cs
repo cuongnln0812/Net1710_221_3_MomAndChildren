@@ -1,84 +1,92 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MomAndChildren.Common;
+using MomAndChildren.Data.DAO;
 using MomAndChildren.Data.Models;
 
 namespace MomAndChildren.Business
 {
-
     public interface IPaymentHistoryBusiness
     {
-        Task<IMomAndChildrenResult> GetPaymentHistoryListAsync();
+        Task<IMomAndChildrenResult> GetPaymentHistoryListByCustomerIdAsync(int id);
         Task<IMomAndChildrenResult> GetPaymentHistoryByIdAsync(int id);
         Task<IMomAndChildrenResult> CreatePaymentHistory(Order order, string method);
-        Task<IMomAndChildrenResult> UpdatePaymentStatus(int id, int status);
     }
 
     public class PaymentHistoryBusiness : IPaymentHistoryBusiness
     {
         private readonly Net1710_221_3_MomAndChildrenContext _context;
+        private readonly PaymentHistoryDAO _DAO;
 
-        public PaymentHistoryBusiness(Net1710_221_3_MomAndChildrenContext context)
+        public PaymentHistoryBusiness()
         {
-            _context = context;
         }
 
-        public async Task<IMomAndChildrenResult> CreatePaymentHistory(Order order, String method)
+        public PaymentHistoryBusiness(Net1710_221_3_MomAndChildrenContext context, PaymentHistoryDAO dao)
         {
-            var paymentHistory = new PaymentHistory
-            {
-                OrderId = order.OrderId,
-                Order = order
-            };
-            if (method.Equals("ONLINE_BANKING"))
-            {
-                paymentHistory.Status = 1;
-                paymentHistory.PurchaseDate = DateTime.Now;
-                paymentHistory.PaymentMethod = method;
-            }else if (method.Equals("COD"))
-            {
-                paymentHistory.Status = 0;
-                paymentHistory.PaymentMethod = method;
-            }
-            else
-            {
-                return new MomAndChildrenResult(0, "Payment method: " + method + " not available");
-            }
-            _context.PaymentHistories.Add(paymentHistory);
-            await _context.SaveChangesAsync();
+            _context = context;
+            _DAO = dao;
+        }
 
-            return new MomAndChildrenResult(1, "Payment completed", paymentHistory);
+        public async Task<IMomAndChildrenResult> CreatePaymentHistory(Order order, string method)
+        {
+            try
+            {
+                var paymentHistory = new PaymentHistory
+                {
+                    OrderId = order.OrderId,
+                    Order = order,
+                    Status = 1,
+                    PurchaseDate = DateTime.Now,
+                    PaymentMethod = method
+                };
+                int result = await _DAO.CreateAsync(paymentHistory);
+                if (result > 0)
+                {
+                    return new MomAndChildrenResult(Const.SUCCESS_CREATE_CODE, "Payment completed");
+                }
+                else
+                {
+                    return new MomAndChildrenResult(Const.FAIL_CREATE_CODE, Const.FAIL_CREATE_MSG);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.ToString());
+            }
         }
 
         public async Task<IMomAndChildrenResult> GetPaymentHistoryByIdAsync(int id)
         {
-            var payment = await _context.PaymentHistories.FindAsync(id);
-            if(payment == null) return new MomAndChildrenResult(0, "Payment not found with id: " + id);
-            else return new MomAndChildrenResult(1, "Get Payment by id: " + id + " successfully", payment);
+            try
+            {
+                var payment = await _DAO.GetByIdAsync(id);
+                if (payment == null) return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, "Payment not found with id: " + id);
+                else return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, "Get Payment by id: " + id + " successfully", payment);
+            }
+            catch (Exception ex)
+            {
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.ToString());
+            }
         }
 
-        public async Task<IMomAndChildrenResult> GetPaymentHistoryListAsync()
+        public async Task<IMomAndChildrenResult> GetPaymentHistoryListByCustomerIdAsync(int id)
         {
-            var paymentList = await _context.PaymentHistories.ToListAsync();
-            return new MomAndChildrenResult(1, "Retrieve Payment list successfully", paymentList);
-        }
-
-        public async Task<IMomAndChildrenResult> UpdatePaymentStatus(int id, int status)
-        {
-            var payment = await _context.PaymentHistories.FindAsync(id);
-            if (payment == null) return new MomAndChildrenResult(0, "Payment not found with id: " + id);
-            if (payment.Status == 0 && status == 1)
+            try
             {
-                payment.Status = status;
-                payment.Status = status;
-                _context.PaymentHistories.Update(payment);
-                await _context.SaveChangesAsync();
+                var paymentList = await _DAO.GetPaymentHistoryListByCustomerId(id);
+                if (paymentList == null)
+                {
+                    return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
+                }
+                else
+                {
+                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, paymentList);
+                }
             }
-            else if (payment.Status == 1 && status == 0)
+            catch (Exception ex)
             {
-                return new MomAndChildrenResult(0, "Cannot update status with status: " + status);
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.ToString());
             }
-            else return new MomAndChildrenResult(0, "Status invalid");
-
-            return new MomAndChildrenResult(1, "Payment update successfully with id: " + id);
         }
     }
 }

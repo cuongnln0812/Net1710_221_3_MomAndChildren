@@ -28,3 +28,4 @@ D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildr
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\MomAndChildren.RazorWebApp.pdb
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\MomAndChildren.RazorWebApp.genruntimeconfig.cache
 D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\ref\MomAndChildren.RazorWebApp.dll
+D:\PRN221\Project\Net1710_221_3_MomAndChildren\Source\Net1710_221_3_MomAndChildren\MomAndChildren.RazorWebApp\obj\Debug\net7.0\MomAndChildren.RazorWebApp.sourcelink.json
