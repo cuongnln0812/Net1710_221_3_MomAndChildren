@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MomAndChildren.Business\MomAndChildren.Business.csproj" />
+    <ProjectReference Include="..\MomAndChildren.Data\MomAndChildren.Data.csproj" />
+  </ItemGroup>
+
 </Project>
