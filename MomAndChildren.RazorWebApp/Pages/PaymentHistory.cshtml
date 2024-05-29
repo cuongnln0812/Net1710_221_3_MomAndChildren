@@ -1,0 +1,28 @@
+﻿@page
+@model PaymentHistoryModel
+@using MomAndChildren.Common
+@using MomAndChildren.Data.Models
+@{
+    <h2>Payment History</h2>
+
+    @if (Model.result != null && Model.result.Status == Const.SUCCESS_READ_CODE)
+    {
+        if (Model.result.Data is IEnumerable<PaymentHistory> payments && payments.Any())
+        {
+            <ul>
+                @foreach (var payment in payments)
+                {
+                    <li>@payment.PaymentId - @payment.PaymentMethod - @payment.PurchaseDate</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No payment history available.</p>
+        }
+    }
+    else
+    {
+        <p>@Model.result?.Message ?? "Error retrieving payment history."</p>
+    }
+}

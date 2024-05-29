@@ -1,6 +1,6 @@
 ﻿namespace MomAndChildren.Common
 {
-    public class Const
+    public static class Const
     {
         #region Error Codes
 

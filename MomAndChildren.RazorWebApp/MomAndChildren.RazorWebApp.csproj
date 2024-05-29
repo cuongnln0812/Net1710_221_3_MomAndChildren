@@ -8,7 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MomAndChildren.Business\MomAndChildren.Business.csproj" />
+    <ProjectReference Include="..\MomAndChildren.Common\MomAndChildren.Common.csproj" />
     <ProjectReference Include="..\MomAndChildren.Data\MomAndChildren.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\PaymentHistory\" />
   </ItemGroup>
 
 </Project>
