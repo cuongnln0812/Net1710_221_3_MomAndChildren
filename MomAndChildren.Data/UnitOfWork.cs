@@ -14,12 +14,21 @@ namespace MomAndChildren.Data
 
         private OrderDetailRepository _orderDetail;
 
+        private PaymentHistoryRepository _paymentHistory;
+
         public UnitOfWork() { }
 
         public OrderDetailRepository OrderDetailRepository
         { 
             get { 
                 return _orderDetail ??= new Repositories.OrderDetailRepository(); 
+            } 
+        }
+
+        public PaymentHistoryRepository PaymentHistoryRepository
+        {
+            get{
+                return _paymentHistory ??= new Repositories.PaymentHistoryRepository();
             } 
         }
     }
