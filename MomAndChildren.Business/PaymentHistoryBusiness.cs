@@ -13,6 +13,7 @@ namespace MomAndChildren.Business
         Task<IMomAndChildrenResult> GetPaymentHistoryListByCustomerIdAsync(int id);
         Task<IMomAndChildrenResult> GetPaymentHistoryByIdAsync(int id);
         Task<IMomAndChildrenResult> CreatePaymentHistory(Order order, string method);
+        Task<IMomAndChildrenResult> UpdatePayment(PaymentHistory paymentHistory);
     }
 
     public class PaymentHistoryBusiness : IPaymentHistoryBusiness
