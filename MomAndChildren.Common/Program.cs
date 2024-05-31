@@ -1,4 +1,4 @@
-﻿namespace MomAndChildren.ConsoleApp
+﻿namespace MomAndChildren.Common
 {
     internal class Program
     {
