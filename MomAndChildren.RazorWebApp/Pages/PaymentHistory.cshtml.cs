@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MomAndChildren.Business;
+using MomAndChildren.Common;
 using MomAndChildren.Data.Models;
 
 namespace MomAndChildren.RazorWebApp.Pages
@@ -17,17 +19,18 @@ namespace MomAndChildren.RazorWebApp.Pages
 
 
         [BindProperty]
-        public Order Order { get; set; }
-        public List<PaymentHistory> PaymentHistories {get; set;}
-        public List<Order> SelectiveOrderList { get; set; }
+        public PaymentHistory Payment { get; set; }
+        public List<PaymentHistory> PaymentHistories { get; set; }
+        public List<SelectListItem> OrderList { get; set; }
 
         [BindProperty]
         public string PaymentMethod { get; set; }
-        public string Message { get; set; }
+        public string? Message { get; set; }
 
         public void OnGet()
         {
             PaymentHistories = this.GetPaymentHistories();
+            OrderList = this.GetOrders();
         }
 
         public void OnPost()
@@ -35,9 +38,23 @@ namespace MomAndChildren.RazorWebApp.Pages
             this.CreatePayment();
         }
 
-        private List<Order> GetOrders()
+        private async List<SelectListItem> GetOrders()
         {
+            var orderResult = await _orderBusiness.GetOrderListAsync();
+            var orders = new List<SelectListItem>();
 
+            if (orderResult.Status == Const.SUCCESS_READ_CODE && orderResult.Data is IEnumerable<Order> orderList)
+            {
+                foreach (var order in orderList)
+                {
+                    orders.Add(new SelectListItem
+                    {
+                        Value = order.OrderId.ToString(),
+                        Text = $"Order #{order.OrderId} - {order.OrderDate.ToShortDateString()}"
+                    });
+                }
+            }
+            return orders;
         }
 
         private List<PaymentHistory> GetPaymentHistories()
@@ -54,7 +71,7 @@ namespace MomAndChildren.RazorWebApp.Pages
 
         private void CreatePayment()
         {
-            var result = _paymentHistoryBusiness.CreatePaymentHistory(Order, PaymentMethod);
+            var result = _paymentHistoryBusiness.CreatePaymentHistory(Payment);
 
             if (result != null)
             {
@@ -64,6 +81,6 @@ namespace MomAndChildren.RazorWebApp.Pages
             {
                 this.Message = "Error system";
             }
-
         }
+    }
 }

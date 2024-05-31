@@ -12,8 +12,4 @@
     <ProjectReference Include="..\MomAndChildren.Data\MomAndChildren.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\PaymentHistory\" />
-  </ItemGroup>
-
 </Project>

@@ -12,8 +12,9 @@ namespace MomAndChildren.Business
         Task<IMomAndChildrenResult> GetPaymentHistoryList();
         Task<IMomAndChildrenResult> GetPaymentHistoryListByCustomerIdAsync(int id);
         Task<IMomAndChildrenResult> GetPaymentHistoryByIdAsync(int id);
-        Task<IMomAndChildrenResult> CreatePaymentHistory(Order order, string method);
+        Task<IMomAndChildrenResult> CreatePaymentHistory(PaymentHistory paymentHistory);
         Task<IMomAndChildrenResult> UpdatePayment(PaymentHistory paymentHistory);
+        Task<IMomAndChildrenResult> RemovePayment(int id);
     }
 
     public class PaymentHistoryBusiness : IPaymentHistoryBusiness
@@ -28,20 +29,12 @@ namespace MomAndChildren.Business
         }
 
 
-        public async Task<IMomAndChildrenResult> CreatePaymentHistory(Order order, string method)
+        public async Task<IMomAndChildrenResult> CreatePaymentHistory(PaymentHistory payment)
         {
             try
             {
-                var paymentHistory = new PaymentHistory
-                {
-                    OrderId = order.OrderId,
-                    Order = order,
-                    Status = 1,
-                    PurchaseDate = DateTime.Now,
-                    PaymentMethod = method
-                };
-                _unitOfWork.PaymentHistoryRepository.PrepareCreate(paymentHistory);
-                int result = _unitOfWork.PaymentHistoryRepository.Save();
+                _unitOfWork.PaymentHistoryRepository.PrepareCreate(payment);
+                int result = await _unitOfWork.PaymentHistoryRepository.SaveAsync();
                 if (result > 0)
                 {
                     return new MomAndChildrenResult(Const.SUCCESS_CREATE_CODE, Const.SUCCESS_CREATE_MSG);
@@ -61,7 +54,7 @@ namespace MomAndChildren.Business
         {
             try
             {
-                var payment = _unitOfWork.PaymentHistoryRepository.GetByIdAsync(id);
+                var payment = await _unitOfWork.PaymentHistoryRepository.GetByIdAsync(id);
                 if (payment == null) return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, "Payment not found with id: " + id);
                 else return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, "Get Payment by id: " + id + " successfully", payment);
             }
@@ -108,6 +101,49 @@ namespace MomAndChildren.Business
             catch (Exception ex)
             {
                 return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
+            }
+        }
+
+        public async Task<IMomAndChildrenResult> UpdatePayment(PaymentHistory paymentHistory)
+        {
+            try
+            {
+                _unitOfWork.PaymentHistoryRepository.PrepareUpdate(paymentHistory);
+                var result = await _unitOfWork.PaymentHistoryRepository.SaveAsync();
+                if (result > 0)
+                {
+                    return new MomAndChildrenResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG);
+                }
+                else
+                {
+                    return new MomAndChildrenResult(Const.FAIL_UPDATE_CODE, Const.FAIL_UPDATE_MSG);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.ToString());
+            }
+        }
+
+        public async Task<IMomAndChildrenResult> RemovePayment(int id)
+        {
+            try
+            {
+                var removedItem = _unitOfWork.PaymentHistoryRepository.GetById(id);
+                _unitOfWork.PaymentHistoryRepository.PrepareRemove(removedItem);
+                var result = await _unitOfWork.PaymentHistoryRepository.SaveAsync();
+                if (result > 0)
+                {
+                    return new MomAndChildrenResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG);
+                }
+                else
+                {
+                    return new MomAndChildrenResult(Const.FAIL_DELETE_CODE, Const.FAIL_DELETE_MSG);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.ToString());
             }
         }
     }
