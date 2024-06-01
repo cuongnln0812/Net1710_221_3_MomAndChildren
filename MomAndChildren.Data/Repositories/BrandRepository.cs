@@ -11,5 +11,6 @@ namespace MomAndChildren.Data.Repositories
     public class BrandRepository : GenericRepository<Brand>
     {
         public BrandRepository() { }
+        public BrandRepository(Net1710_221_3_MomAndChildrenContext context) => _context = context;
     }
 }

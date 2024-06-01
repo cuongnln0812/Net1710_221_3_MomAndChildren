@@ -14,7 +14,7 @@ namespace MomAndChildren.Data.Repositories
         public OrderRepository()
         {
         }
-
+        public OrderRepository(Net1710_221_3_MomAndChildrenContext context) => _context = context;
         public async Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(int customerId)
         {
             return await _context.Orders.Where(o => o.CustomerId == customerId).ToListAsync();

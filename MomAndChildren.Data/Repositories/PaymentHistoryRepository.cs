@@ -12,7 +12,7 @@ namespace MomAndChildren.Data.Repositories
     public class PaymentHistoryRepository : GenericRepository<PaymentHistory>
     {
         public PaymentHistoryRepository() { }
-
+        public PaymentHistoryRepository(Net1710_221_3_MomAndChildrenContext context) => _context = context;
         public async Task<List<PaymentHistory>> GetPaymentHistoryListByCustomerId(int id)
         {
             return await _context.PaymentHistories
