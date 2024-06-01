@@ -14,7 +14,9 @@ namespace MomAndChildren.Data
 
         private CategoryRepository _category;
 
+        private OrderRepository _order;
         private OrderDetailRepository _orderDetail;
+        private PaymentHistoryRepository _paymentHistory;
 
         private ProductRepository _product;
 
@@ -101,6 +103,22 @@ namespace MomAndChildren.Data
             }
 
             return result;
+        }
+
+        public PaymentHistoryRepository PaymentHistoryRepository
+        {
+            get
+            {
+                return _paymentHistory ??= new Repositories.PaymentHistoryRepository();
+            }
+        }
+
+        public OrderRepository OrderRepository 
+        { 
+            get
+            { 
+                return _order ??= new Repositories.OrderRepository(); 
+            }
         }
 
         #endregion

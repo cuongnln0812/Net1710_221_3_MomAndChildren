@@ -1,12 +1,16 @@
 using MomAndChildren.Business;
+using MomAndChildren.Data.Repositories;
+using MomAndChildren.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IPaymentHistoryBusiness, PaymentHistoryBusiness>();
+builder.Services.AddScoped<IOrderBusiness, OrderBusiness>();
 
 var app = builder.Build();
-
+    
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

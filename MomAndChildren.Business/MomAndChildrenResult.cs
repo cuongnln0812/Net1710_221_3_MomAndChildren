@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MomAndChildren.Business
 {
+
     public interface IMomAndChildrenResult
     {
         int Status { get; set; }
@@ -37,5 +38,7 @@ namespace MomAndChildren.Business
             Message = message;
             Data = data;
         }
+
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MomAndChildren.Common
 {
-    public class Const
+    public static class Const
     {
         #region Error Codes
 
@@ -48,5 +48,6 @@ namespace MomAndChildren.Common
         public static string WARNING_NO_DATA__MSG = "No data";
 
         #endregion
+
     }
 }
