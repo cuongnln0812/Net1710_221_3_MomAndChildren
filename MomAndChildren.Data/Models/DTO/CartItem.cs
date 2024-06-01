@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MomAndChildren.Data.Models.DTO
 {
-    public class ProductCart
+    public class CartItem
     {
+        public int ProductId { get; set; }
         public Product? Product { get; set; }
-        public int QuantityCart { get; set; }
-        public double UnitPrice { get; set; }
+        public int Quantity { get; set; }
     }
 }

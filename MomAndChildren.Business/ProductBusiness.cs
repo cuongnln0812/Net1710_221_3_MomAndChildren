@@ -29,7 +29,7 @@ namespace MomAndChildren.Business
             _unitOfWork ??= new UnitOfWork();
         }
 
-        public Task<IMomAndChildrenResult> CreateProduct(Product product)
+        public async Task<IMomAndChildrenResult> CreateProduct(Product product)
         {
             if (_unitOfWork.ProductRepository.GetAll().Any(p => p.ProductId == product.ProductId))
             {
@@ -42,46 +42,48 @@ namespace MomAndChildren.Business
 
         public async Task<IMomAndChildrenResult> DeleteProduct(int productId)
         {
-            Product product = _context.Products.Find(productId);
+            Product product = _unitOfWork.ProductRepository.GetById(productId);
             if (product == null)
             {
-                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(-1, "Product not found"));
-            }else
+                return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
+            }
+            else
             {
-                _context.Products.Remove(product);
-                _context.SaveChanges();
-                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Delete product success"));
+                await _unitOfWork.ProductRepository.RemoveAsync(product);
+                await _unitOfWork.ProductRepository.SaveAsync();
+                return new MomAndChildrenResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG);
             }
         }
 
         public async Task<IMomAndChildrenResult> GetProductByIdAsync(int productId)
         {
-            Product product = _context.Products.Find(id);
+            Product product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
             if (product == null)
             {
-                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(-1, "Product not found"));
-            }else
+                return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
+            }
+            else
             {
-                return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Get product success", product));
+                return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG);
             }
         }
 
         public async Task<IMomAndChildrenResult> GetProductsAsync()
         {
-            List<Product> products = _context.Products.ToList();
-            return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Get products success", products));
+            List<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
+            return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, products);
         }
 
         public bool ProductExists(int id)
         {
-            return _context.Products.Any(e => e.ProductId == id);
+            return _unitOfWork.ProductRepository.GetAll().Any(e => e.ProductId == id);
         }
 
         public async Task<IMomAndChildrenResult> UpdateProduct(Product product)
         {
-            _context.Products.Update(product);
-            _context.SaveChanges();
-            return Task.FromResult<IMomAndChildrenResult>(new MomAndChildrenResult(1, "Update product success", product));
+            await _unitOfWork.ProductRepository.UpdateAsync(product);
+            await _unitOfWork.ProductRepository.SaveAsync();
+            return new MomAndChildrenResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG);
         }
     }
 }
