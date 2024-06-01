@@ -10,5 +10,6 @@ namespace MomAndChildren.Data.Models.DTO
     {
         public Product? Product { get; set; }
         public int QuantityCart { get; set; }
+        public double UnitPrice { get; set; }
     }
 }

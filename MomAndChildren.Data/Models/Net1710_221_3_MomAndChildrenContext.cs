@@ -33,11 +33,15 @@ public partial class Net1710_221_3_MomAndChildrenContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("data source=HENRY-LAPTOP\\HENRY;initial catalog=Net1710_221_3_MomAndChildren;user id=sa;password=12345;Integrated Security=True;TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer("data source=MSI;initial catalog=Net1710_221_3_MomAndChildren;user id=SA;password=12345;Integrated Security=True;TrustServerCertificate=True");
         base.OnConfiguring(optionsBuilder);
     }
+
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

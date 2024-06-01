@@ -11,10 +11,12 @@ namespace MomAndChildren.RazorWebApp.Pages
     {
 
         private readonly IPaymentHistoryBusiness _paymentHistoryBusiness;
+        private readonly IOrderBusiness _orderBusiness;
 
-        public PaymentHistoryModel(IPaymentHistoryBusiness paymentHistoryBusiness)
+        public PaymentHistoryModel(IPaymentHistoryBusiness paymentHistoryBusiness, IOrderBusiness orderBusiness)
         {
             _paymentHistoryBusiness = paymentHistoryBusiness;
+            _orderBusiness = orderBusiness;
         }
 
 
@@ -22,9 +24,6 @@ namespace MomAndChildren.RazorWebApp.Pages
         public PaymentHistory Payment { get; set; }
         public List<PaymentHistory> PaymentHistories { get; set; }
         public List<SelectListItem> OrderList { get; set; }
-
-        [BindProperty]
-        public string PaymentMethod { get; set; }
         public string? Message { get; set; }
 
         public void OnGet()
@@ -38,12 +37,22 @@ namespace MomAndChildren.RazorWebApp.Pages
             this.CreatePayment();
         }
 
-        private async List<SelectListItem> GetOrders()
+        public void OnPostUpdate()
         {
-            var orderResult = await _orderBusiness.GetOrderListAsync();
+            this.UpdatePayment();
+        }
+
+        public void OnPostDelete(int paymentId)
+        {
+            this.DeletePayment(paymentId);
+        }
+
+        private List<SelectListItem> GetOrders()
+        {
+            var orderResult = _orderBusiness.GetAllOrdersWherePaymentIsNotNullAsync();
             var orders = new List<SelectListItem>();
 
-            if (orderResult.Status == Const.SUCCESS_READ_CODE && orderResult.Data is IEnumerable<Order> orderList)
+            if (orderResult.Result.Status == Const.SUCCESS_READ_CODE && orderResult.Result.Data is IEnumerable<Order> orderList)
             {
                 foreach (var order in orderList)
                 {
@@ -72,6 +81,33 @@ namespace MomAndChildren.RazorWebApp.Pages
         private void CreatePayment()
         {
             var result = _paymentHistoryBusiness.CreatePaymentHistory(Payment);
+
+            if (result != null)
+            {
+                Message = result.Result.Message;
+            }
+            else
+            {
+                this.Message = "Error system";
+            }
+        }
+        private void UpdatePayment()
+        {
+            var result = _paymentHistoryBusiness.UpdatePayment(Payment);
+
+            if (result != null)
+            {
+                Message = result.Result.Message;
+            }
+            else
+            {
+                this.Message = "Error system";
+            }
+        }
+
+        private void DeletePayment(int paymentId)
+        {
+            var result = _paymentHistoryBusiness.RemovePayment(paymentId);
 
             if (result != null)
             {

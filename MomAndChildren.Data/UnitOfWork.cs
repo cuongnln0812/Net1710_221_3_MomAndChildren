@@ -9,17 +9,15 @@ using System.Threading.Tasks;
 namespace MomAndChildren.Data
 {
     public class UnitOfWork
-    {
-        private Net1710_221_3_MomAndChildrenContext _unitOfWorkContext;
-
+    { 
+        private OrderRepository _order;
         private OrderDetailRepository _orderDetail;
-
         private PaymentHistoryRepository _paymentHistory;
 
         public UnitOfWork() { }
 
         public OrderDetailRepository OrderDetailRepository
-        { 
+        {
             get { 
                 return _orderDetail ??= new Repositories.OrderDetailRepository(); 
             } 
@@ -27,9 +25,18 @@ namespace MomAndChildren.Data
 
         public PaymentHistoryRepository PaymentHistoryRepository
         {
-            get{
+            get
+            {
                 return _paymentHistory ??= new Repositories.PaymentHistoryRepository();
-            } 
+            }
+        }
+
+        public OrderRepository OrderRepository 
+        { 
+            get
+            { 
+                return _order ??= new Repositories.OrderRepository(); 
+            }
         }
     }
 }

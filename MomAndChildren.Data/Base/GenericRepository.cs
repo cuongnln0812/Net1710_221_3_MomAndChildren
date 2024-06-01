@@ -60,10 +60,12 @@ namespace MomAndChildren.Data.Base
         {
             return _dbSet.ToList();
         }
+
         public async Task<List<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
+
         public void Create(T entity)
         {
             _dbSet.Add(entity);
