@@ -60,7 +60,7 @@ namespace MomAndChildren.Business
             Product product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
             if (product == null)
             {
-                return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG);
+                return new MomAndChildrenResult(Const.WARNING_NO_DATA_CODE, Const.WARNING_NO_DATA__MSG, product);
             }
             else
             {
@@ -71,7 +71,7 @@ namespace MomAndChildren.Business
         public async Task<IMomAndChildrenResult> GetProductsAsync()
         {
             List<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
-            return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG);
+            return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, products);
         }
 
         public bool ProductExists(int id)
