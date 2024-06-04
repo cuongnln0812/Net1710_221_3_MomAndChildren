@@ -23,14 +23,11 @@ namespace MomAndChildren.Business
 
     public class BrandBusiness : IBrandBusiness
     {
-        //private readonly BrandDAO _BrandDAO;
-        //private readonly ProductDAO _ProductDAO;
+
         private readonly UnitOfWork _unitOfWork;
 
         public BrandBusiness()
         {
-            //_BrandDAO = new BrandDAO();
-            //_ProductDAO = new ProductDAO();
             _unitOfWork ??= new UnitOfWork();
         }
 

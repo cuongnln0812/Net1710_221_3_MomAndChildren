@@ -1,12 +1,12 @@
 ﻿@page
 @model MomAndChildren.RazorWebApp.Pages.CategoryModel
 @{
-    ViewData["Title"] = "Category page";
+    ViewData["Title"] = "Category Page";
     var categories = Model.Categories;
 }
 
 <div class="text-center">
-    <h1 class="display-6">Category management</h1>
+    <h1 class="display-6">Category Management</h1>
 </div>
 
 <div class="row">
@@ -25,7 +25,7 @@
                     <th class="card-title text-center">Code</th>
                     <th class="card-title text-center">Name</th>
                     <th class="card-title text-center">Status</th>
-                    <th class="card-title text-center"></th>
+                    <th class="card-title text-center">Action</th>
                 </tr>
             </thead>
             <tbody class="tblcategoryList">
@@ -37,7 +37,11 @@
                             <td>@category.CategoryId</td>
                             <td>@category.CategoryName</td>
                             <td>@category.Status</td>
-                            <></>
+                            <td>
+                                    <a class="nav-link text-dark collapse d-sm-inline-flex justify-content-between" asp-area="" onclick="edit()">Edit</a>
+                                    <a class="nav-link text-dark collapse d-sm-inline-flex justify-content-between" asp-area="" onclick="delete()">Delete</a>
+                                    <a class="nav-link text-dark collapse d-sm-inline-flex justify-content-between" asp-area="" onclick="changeStatus()">Change Status</a>                                                                              
+                            </td>
                         </tr>
                     }
                 }
@@ -65,26 +69,8 @@
                                     <label for="1">Name</label>
                                     <input asp-for="Category.CategoryName" class="form-control" />
                                 </div>
-                                @* <div class="col-md-6">
-                            <label for="1">Active</label>
-                            <input asp-for="Currency.IsActive" type="checkbox" />
-                            <input type="checkbox" id="Currency_IsActive" name="Currency.IsActive" class="form-check-input" />
-                            <input type="hidden" id="Currency_IsActive" value="@Model.Currency?.IsActive" />
-                            </div> *@
                             </div>
                         </div>
-                        @* <div class="col-md-12">
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <label for="1">Name</label>
-                                    <input asp-for="Currency.CurrencyName" class="form-control" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="1">Nation</label>
-                                    <input asp-for="Currency.NationCode" class="form-control" />
-                                </div>
-                            </div> 
-                        </div> *@
                         <div class="col-md-12">
                             <label>@Model.Message</label>
                         </div>
@@ -105,8 +91,14 @@
         function add() {
             $('#categoryAddModal').modal('show');
         }
-        function edit(id) {
+        function edit(int id) {
             $("#categoryPutModal").modal('show');
+        }
+        function delete (int id) {
+            $("#categoryDeleteModal").modal('show');
+        }
+        function changeStatus(int id) {
+            $("#categoryChangeStatusModal").modal('show');
         }
     </script>
 }

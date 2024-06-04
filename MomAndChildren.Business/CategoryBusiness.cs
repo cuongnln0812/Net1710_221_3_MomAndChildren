@@ -23,14 +23,11 @@ namespace MomAndChildren.Business
 
     public class CategoryBusiness : ICategoryBusiness
     {
-        //private readonly CategoryDAO _CategoryDAO;
-        //private readonly ProductDAO _ProductDAO;
+
         private readonly UnitOfWork _unitOfWork;
 
         public CategoryBusiness()
         {
-            //_CategoryDAO = new CategoryDAO();
-            //_ProductDAO = new ProductDAO();
             _unitOfWork ??= new UnitOfWork();
         }
 

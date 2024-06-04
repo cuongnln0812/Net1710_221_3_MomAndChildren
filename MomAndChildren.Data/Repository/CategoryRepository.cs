@@ -11,6 +11,7 @@ namespace MomAndChildren.Data.Repository
     public class CategoryRepository : GenericRepository<Category>
     {
         public CategoryRepository() { }
+        public CategoryRepository(Net1710_221_3_MomAndChildrenContext context) => _context = context;
 
         //TO-DO CODE HERE///
     }
