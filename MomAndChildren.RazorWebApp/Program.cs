@@ -1,13 +1,12 @@
-using MomAndChildren.Business;
-using MomAndChildren.Data.Repositories;
-using MomAndChildren.Data;
+﻿using MomAndChildren.Business;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<IPaymentHistoryBusiness, PaymentHistoryBusiness>();
-builder.Services.AddScoped<IOrderBusiness, OrderBusiness>();
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICartBusiness, CartBusiness>(); // Đăng ký ICartBusiness với CartBusiness
 
 var app = builder.Build();
     
@@ -23,6 +22,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession(); // Use session middleware
 
 app.UseAuthorization();
 

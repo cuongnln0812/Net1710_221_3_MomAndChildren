@@ -2,6 +2,7 @@
 using MomAndChildren.Data;
 using MomAndChildren.Data.Models;
 using MomAndChildren.Data.Models.DTO;
+using MomAndChildren.Data.Repositories;
 
 
 namespace MomAndChildren.Business
@@ -10,7 +11,9 @@ namespace MomAndChildren.Business
     {
         Task<IMomAndChildrenResult> GetOrderDetailsAsync();
         Task<IMomAndChildrenResult> GetOrderDetailByIdAsync(int orderDetailId);
-        Task<IMomAndChildrenResult> CreateOrderDetail(int orderId, List<ProductCart> products);
+        Task<IMomAndChildrenResult> CreateOrderDetail(int orderId, List<CartItem> products);
+        Task<IMomAndChildrenResult> UpdateOrderDetailQuantity(int detailId, long quantity);
+        Task<IMomAndChildrenResult> DeleteOrderDetail(int detailId);
     }
 
     public class OrderDetailBusiness : IOrderDetailBusiness
@@ -24,14 +27,13 @@ namespace MomAndChildren.Business
             _unitOfWork ??= new UnitOfWork();
         }
 
-        public async Task<IMomAndChildrenResult> CreateOrderDetail(int orderId, List<ProductCart> products)
+        public async Task<IMomAndChildrenResult> CreateOrderDetail(int orderId, List<CartItem> products)
         {
             //create new order details
-            var orderDetails = new List<OrderDetail>();
             foreach (var item in products)
             {
                 double price = item.Product.Price;
-                int quantityCart = item.QuantityCart;
+                int quantityCart = item.Quantity;
 
                 var orderDetail = new OrderDetail
                 {
@@ -41,9 +43,8 @@ namespace MomAndChildren.Business
                     ProductId = item.Product.ProductId,
                     Quantity = quantityCart,
                 };
-                orderDetails.Add(orderDetail);
+                await _unitOfWork.OrderDetailRepository.CreateAsync(orderDetail);
             }
-            await _unitOfWork.OrderDetailRepository.CreateListAsync(orderDetails);
             return new MomAndChildrenResult(Const.SUCCESS_CREATE_CODE, Const.SUCCESS_CREATE_MSG);
         }
 
@@ -62,8 +63,46 @@ namespace MomAndChildren.Business
 
         public async Task<IMomAndChildrenResult> GetOrderDetailsAsync()
         {
-            var orderDetails = await _unitOfWork.OrderDetailRepository.GetAllAsync();
-            return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orderDetails);
+            try
+            {
+                var orderDetails = await _unitOfWork.OrderDetailRepository.GetAllAsyncOrderDetails();
+                if (orderDetails == null)
+                {
+                    return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.FAIL_READ_MSG);
+                }
+                else
+                {
+                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orderDetails);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
+            }
+        }
+
+        public async Task<IMomAndChildrenResult> UpdateOrderDetailQuantity(int detailId, long quantity)
+        {
+            var orderDetail = await _unitOfWork.OrderDetailRepository.GetByIdAsync(detailId);
+            if (orderDetail != null)
+            {
+                orderDetail.Quantity = quantity;
+                orderDetail.TotalPrice = quantity * orderDetail.UnitPrice;
+                await _unitOfWork.OrderDetailRepository.UpdateAsync(orderDetail);
+                return new MomAndChildrenResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG);
+            }
+            return new MomAndChildrenResult(Const.FAIL_UPDATE_CODE, Const.FAIL_UPDATE_MSG);
+        }
+
+        public async Task<IMomAndChildrenResult> DeleteOrderDetail(int detailId)
+        {
+            var orderDetail = await _unitOfWork.OrderDetailRepository.GetByIdAsync(detailId);
+            if (orderDetail != null)
+            {
+                await _unitOfWork.OrderDetailRepository.RemoveAsync(orderDetail);
+                return new MomAndChildrenResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG);
+            }
+            return new MomAndChildrenResult(Const.FAIL_DELETE_CODE, Const.FAIL_DELETE_MSG);
 
         }
     }
