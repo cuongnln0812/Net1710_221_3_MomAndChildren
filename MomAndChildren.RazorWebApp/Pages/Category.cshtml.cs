@@ -14,6 +14,11 @@ namespace MomAndChildren.RazorWebApp.Pages
         public Category Category { get; set; } = default;
         public List<Category> Categories { get; set; } = new List<Category>();
 
+        [BindProperty]
+        public Boolean CheckStatus { get; set; }
+        [BindProperty]
+        public Boolean IsUpdate { get; set; }
+
         public void OnGet()
         {
             Categories = this.GetCategories();
@@ -21,7 +26,15 @@ namespace MomAndChildren.RazorWebApp.Pages
 
         public void OnPost()
         {
-            this.SaveCategory();
+            if (IsUpdate)
+            {
+                this.UpdateCategory();
+            }
+            else
+            {
+                this.SaveCategory();
+            }
+            
         }
 
         public void OnDelete()
@@ -29,11 +42,13 @@ namespace MomAndChildren.RazorWebApp.Pages
         }
 
 
+
+
         private List<Category> GetCategories()
         {
             var categoryResult = _categoryBusiness.GetCategoriesAsync();
 
-            if (categoryResult.Status > 0 && categoryResult.Result.Data != null)
+            if (categoryResult.Result.Data != null)
             {
                 var categories = (List<Category>)categoryResult.Result.Data;
                 return categories;
@@ -43,6 +58,15 @@ namespace MomAndChildren.RazorWebApp.Pages
 
         private void SaveCategory()
         {
+            if (CheckStatus)
+            {
+
+                this.Category.Status = 1;
+            }
+            else
+            {
+                this.Category.Status = 0;
+            }
             var categoryResult = _categoryBusiness.CreateCategory(this.Category);
 
             if (categoryResult != null)
@@ -53,7 +77,30 @@ namespace MomAndChildren.RazorWebApp.Pages
             {
                 this.Message = "Error system";
             }
+
+            Categories = this.GetCategories();
+        }
+
+        private void UpdateCategory()
+        {
+            var categoryResult = _categoryBusiness.UpdateCategory(this.Category);
+            if (this.Category.CategoryName.Length == 0)
+            {
+                this.Message = "Name is mandatory";
+            }
+
+            if (categoryResult != null)
+            {
+                this.Message = categoryResult.Result.Message;
+            }
+            else
+            {
+                this.Message = "Error system";
+            }
+
+            Categories = this.GetCategories();
         }
 
     }
+    
 }

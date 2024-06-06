@@ -46,7 +46,7 @@ namespace MomAndChildren.Business
                         return new MomAndChildrenResult(Const.ERROR_EXCEPTION, "Name is duplicated.");
                     }
                 }
-                category.Status = 1;
+
                 int result = await _unitOfWork.CategoryRepository.CreateAsync(category);
 
                 if (result > 0)
