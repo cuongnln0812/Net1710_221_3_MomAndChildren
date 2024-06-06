@@ -11,9 +11,11 @@ namespace MomAndChildren.Data.Repository
 {
     public class OrderRepository : GenericRepository<Order>
     {
-        public OrderRepository() 
+        public OrderRepository()
         {
         }
+
+        public OrderRepository(Net1710_221_3_MomAndChildrenContext context) => _context = context;
 
         public async Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(int customerId)
         {
