@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MomAndChildren.RazorWebApp"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MomAndChildren.Common", "MomAndChildren.Common\MomAndChildren.Common.csproj", "{1114557E-6901-4BB5-A66C-128B61DD716F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MomAndChildren.WpfApp", "MomAndChildren.WpfApp\MomAndChildren.WpfApp.csproj", "{DB7C256F-66EE-41B4-88FA-19EA032BF86F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1114557E-6901-4BB5-A66C-128B61DD716F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1114557E-6901-4BB5-A66C-128B61DD716F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1114557E-6901-4BB5-A66C-128B61DD716F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB7C256F-66EE-41B4-88FA-19EA032BF86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB7C256F-66EE-41B4-88FA-19EA032BF86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB7C256F-66EE-41B4-88FA-19EA032BF86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB7C256F-66EE-41B4-88FA-19EA032BF86F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

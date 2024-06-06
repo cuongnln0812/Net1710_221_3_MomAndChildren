@@ -14,6 +14,12 @@ namespace MomAndChildren.Data
 
         private OrderRepository _order;
 
+        private CategoryRepository _category;
+
+        private BrandRepository _brand;
+
+        private ProductRepository _product;
+
         public UnitOfWork()
         {
             _unitOfWorkContext ??= new Net1710_221_3_MomAndChildrenContext();
@@ -24,6 +30,30 @@ namespace MomAndChildren.Data
             get
             {
                 return _order ??= new Repository.OrderRepository(_unitOfWorkContext);
+            }
+        }
+
+        public CategoryRepository CategoryRepository
+        {
+            get
+            {
+                return _category ??= new Repository.CategoryRepository(_unitOfWorkContext);
+            }
+        }
+
+        public BrandRepository BrandRepository
+        {
+            get
+            {
+                return _brand ??= new Repository.BrandRepository(_unitOfWorkContext);
+            }
+        }
+
+        public ProductRepository ProductRepository
+        {
+            get
+            {
+                return _product ??= new Repository.ProductRepository(_unitOfWorkContext);
             }
         }
 
