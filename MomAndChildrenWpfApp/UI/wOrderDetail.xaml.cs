@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace MomAndChildrenWpfApp.UI
 {
@@ -110,7 +111,7 @@ namespace MomAndChildrenWpfApp.UI
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private async void grdOrderDetail_ButtonDelete_Click(object sender, RoutedEventArgs e)

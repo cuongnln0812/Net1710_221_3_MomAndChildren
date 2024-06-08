@@ -31,7 +31,7 @@
                             <input type="number" name="orderDetails[@orderDetail.OrderDetailId]" value="@orderDetail.Quantity" class="form-control d-none" />
                         </td>
                         <td>@orderDetail.UnitPrice</td>
-                        <td>@(orderDetail.Quantity * orderDetail.UnitPrice)</td>
+                        <td>@orderDetail.TotalPrice</td>
                         <td>
                             <button type="submit" formaction="/OrderDetail?handler=Delete&orderDetailId=@orderDetail.OrderDetailId" class="btn btn-danger">Delete</button>
                         </td>

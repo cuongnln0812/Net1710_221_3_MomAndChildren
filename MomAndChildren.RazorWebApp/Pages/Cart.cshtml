@@ -3,16 +3,18 @@
 @{
     Layout = "_Layout";
 }
+
+
+<div class="text-center">
+    <h1 class="display-6">Your Cart</h1>
+</div>
+
 <div class="row">
     <div class="col-md-12 text-end">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
             Add Product
         </button>
     </div>
-</div>
-
-<div class="text-center">
-    <h1 class="display-6">Your Cart</h1>
 </div>
 
 @if (Model.CartItems != null && Model.CartItems.Any())
@@ -51,37 +53,6 @@ else
 }
 
 
-<!-- Modal for creating order -->
-<div class="modal fade" id="createOrderModal" tabindex="-1" aria-labelledby="createOrderModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createOrderModalLabel">Create Order</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" asp-page-handler="CreateOrder" onsubmit="return validateAddOrderIdForm()">
-                    <div class="form-group">
-                        <label for="OrderId">Order ID</label>
-                        <select id="OrderId" class="form-control">
-                            <option value="0">Select an order ID</option>
-                            @foreach (var order in Model.OrderIds)
-                            {
-                                <option value="@order.OrderId">@order.OrderId</option>
-                            }
-                        </select>
-                        <span id="orderIdError" class="text-danger"></span>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Create Order</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Modal -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -110,6 +81,38 @@ else
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for creating order -->
+<div class="modal fade" id="createOrderModal" tabindex="-1" aria-labelledby="createOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createOrderModalLabel">Create Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="CreateOrder" onsubmit="return validateAddOrderIdForm()">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label for="OrderId">Order ID</label>
+                        <select id="OrderId" asp-for="OrderId" class="form-control" required>
+                            <option value="0">Select an order ID</option>
+                            @foreach (var order in Model.OrderIds)
+                            {
+                                <option value="@order.OrderId">@order.OrderId</option>
+                            }
+                        </select>
+                        <span id="orderIdError" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Create Order</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
