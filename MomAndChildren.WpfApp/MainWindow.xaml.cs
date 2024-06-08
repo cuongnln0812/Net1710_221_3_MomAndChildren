@@ -28,5 +28,12 @@ namespace MomAndChildren.WpfApp
             p.Owner = this;
             p.Show();
         }
+
+        private async void Open_wBrand_Click(object sender, RoutedEventArgs e)
+        {
+            var p = new wBrand();
+            p.Owner = this;
+            p.Show();
+        }
     }
 }

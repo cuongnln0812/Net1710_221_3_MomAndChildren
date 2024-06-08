@@ -39,7 +39,7 @@ namespace MomAndChildren.Business
                 var brands = await _unitOfWork.BrandRepository.GetAllAsync();
                 foreach (var item in brands)
                 {
-                    if (brand.BrandName.Equals(item.BrandName))
+                    if (String.Equals(brand.BrandName, item.BrandName, StringComparison.OrdinalIgnoreCase))
                     {
                         return new MomAndChildrenResult(Const.ERROR_EXCEPTION, "Name is duplicated.");
                     }

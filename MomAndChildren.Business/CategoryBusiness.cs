@@ -41,7 +41,8 @@ namespace MomAndChildren.Business
                 var categories = await _unitOfWork.CategoryRepository.GetAllAsync();
                 foreach (var item in categories)
                 {
-                    if (category.CategoryName.Equals(item.CategoryName))
+                    //if (category.CategoryName.Equals(item.CategoryName))
+                    if (String.Equals(category.CategoryName, item.CategoryName, StringComparison.OrdinalIgnoreCase))
                     {
                         return new MomAndChildrenResult(Const.ERROR_EXCEPTION, "Name is duplicated.");
                     }

@@ -50,8 +50,6 @@ namespace MomAndChildren.WpfApp.UI
                          var category = new Category()
                     {
                         CategoryName = txtCategoryName.Text,
-
-
                         Status = status
                         };
 
@@ -87,7 +85,7 @@ namespace MomAndChildren.WpfApp.UI
         {
             if (MessageBox.Show("Do you want to exit?", "Exit", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                Application.Current.Shutdown();
+                this.Hide();
             }
             
         }
@@ -123,11 +121,11 @@ namespace MomAndChildren.WpfApp.UI
                     var item = row.Item as Category;
                     if (item != null)
                     {
-                        var currencyResult = await _business.GetCategoryByIdAsync(item.CategoryId);
+                        var categoryResult = await _business.GetCategoryByIdAsync(item.CategoryId);
 
-                        if (currencyResult.Status > 0 && currencyResult.Data != null)
+                        if (categoryResult.Status > 0 && categoryResult.Data != null)
                         {
-                            item = currencyResult.Data as Category;
+                            item = categoryResult.Data as Category;
                             txtCategoryCode.Text = item.CategoryId.ToString();
                             txtCategoryName.Text = item.CategoryName;
                             chkIsActive.IsChecked = Convert.ToBoolean(item.Status);
@@ -143,11 +141,11 @@ namespace MomAndChildren.WpfApp.UI
 
             if (result.Status > 0 && result.Data != null)
             {
-                grdCurrency.ItemsSource = result.Data as List<Category>;
+                grdCategory.ItemsSource = result.Data as List<Category>;
             }
             else
             {
-                grdCurrency.ItemsSource = new List<Category>();
+                grdCategory.ItemsSource = new List<Category>();
             }
         }
 
