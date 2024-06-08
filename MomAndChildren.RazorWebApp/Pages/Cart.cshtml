@@ -3,6 +3,12 @@
 @{
     Layout = "_Layout";
 }
+
+
+<div class="text-center">
+    <h1 class="display-6">Your Cart</h1>
+</div>
+
 <div class="row">
     <div class="col-md-12 text-end">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
@@ -11,37 +17,41 @@
     </div>
 </div>
 
-<div class="text-center">
-    <h1 class="display-6">Your Cart</h1>
-</div>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.CartItems)
-        {
+@if (Model.CartItems != null && Model.CartItems.Any())
+{
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@item.Product.ProductName</td>
-                <td>@item.Quantity</td>
-                <td>@item.Product.Price</td>
-                <td>@(item.Product.Price * item.Quantity)</td>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.Price</td>
+                    <td>@(item.Product.Price * item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
+    <form method="post" asp-page-handler="CreateOrder">
+        <button type="submit" class="btn btn-success mt-3">Create Order</button>
+    </form>
+}
+else
+{
+    <div class="alert alert-info text-center" role="alert">
+        Your cart is empty.
+    </div>
+}
 
-
-<form method="post" asp-page-handler="CreateOrder">
-    <button type="submit" class="btn btn-success mt-3">Create Order</button>
-</form>
 
 <!-- Modal -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">

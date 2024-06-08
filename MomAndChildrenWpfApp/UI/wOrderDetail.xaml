@@ -6,5 +6,70 @@
         xmlns:local="clr-namespace:MomAndChildrenWpfApp.UI"
         mc:Ignorable="d"
         Title="wOrderDetail" Height="450" Width="800">
-    <Grid/>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <GroupBox Header="OrderDetail Form" Margin="10">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Order Detail ID" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtOrderDetailId" Text="{Binding Path=OrderDetailId, Mode=TwoWay}" Margin="5" IsReadOnly="True"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Order ID" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtOrderId" Text="{Binding Path=OrderId, Mode=TwoWay}" Margin="5"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="Product ID" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtProductId" Text="{Binding Path=ProductId, Mode=TwoWay}" Margin="5"/>
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="Quantity" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtQuantity" Text="{Binding Path=Quantity, Mode=TwoWay}" Margin="5"/>
+
+                    
+                </Grid>
+            </GroupBox>
+            <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="ButtonSave" Content="Save" Height="30" Width="80" Click="ButtonSave_Click"/>
+                <Button x:Name="ButtonCancel" Content="Cancel" Height="30" Width="80" Click="ButtonCancel_Click" RenderTransformOrigin="-0.011,0.695"/>
+            </StackPanel>
+            <StackPanel Height="210">
+                <DataGrid x:Name="grdOrderDetails" AutoGenerateColumns="False" ItemsSource="{Binding OrderDetails}" CanUserAddRows="False" Height="200" Margin="10" MouseDoubleClick="grdCategory_MouseDouble_Click" SelectionMode="Single" SelectionUnit="FullRow">
+                    <DataGrid.Columns>
+                        <!--<DataGridTextColumn Header="Code" Binding="{Binding Path=Id}" Visibility="Hidden"/>-->
+                        <DataGridTextColumn Header="Order Detail ID" Binding="{Binding Path=OrderDetailId}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Order ID" Binding="{Binding Path=OrderId}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Product ID" Binding="{Binding Path=ProductId}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="60" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Total Price" Binding="{Binding Path=TotalPrice}" Width="100" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Width="50">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="X" x:Name="ButtonDelete" CommandParameter="{Binding Path=OrderDetailId}" Click="grdCategory_ButtonDelete_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--<DataGridTemplateColumn Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" x:Name="ButtonDelete" CommandParameter="{Binding Path=Id}"
+                                Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor,
+                                        AncestorType=Window}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
 </Window>
