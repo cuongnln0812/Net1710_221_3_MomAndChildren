@@ -15,9 +15,10 @@ namespace MomAndChildren.Business
 {
     public interface IOrderBusiness
     {
-        Task<IMomAndChildrenResult> CreateOrder(int customerId, List<ProductCart> productCarts);
+        Task<IMomAndChildrenResult> CreateOrder(int customerId, List<CartItem> productCarts);
         Task<IMomAndChildrenResult> GetOrdersAsyncByCustomerId(int customerId);
         Task<IMomAndChildrenResult> GetAllOrdersWherePaymentIsNotNullAsync();
+        Task<IMomAndChildrenResult> GetOrdersAsync();
     }
 
     public class OrderBusiness : IOrderBusiness
@@ -57,7 +58,21 @@ namespace MomAndChildren.Business
             }
         }
 
-        public async Task<IMomAndChildrenResult> CreateOrder(int customerId, List<ProductCart> productCarts)
+        public async Task<IMomAndChildrenResult> GetOrdersAsync()
+        {
+            try
+            {
+                var orders = await _unitOfWork.OrderRepository.GetAllAsync();
+
+                return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, orders);
+            }
+            catch (Exception ex)
+            {
+                return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.WARNING_NO_DATA__MSG);
+            }
+        }
+
+        public async Task<IMomAndChildrenResult> CreateOrder(int customerId, List<CartItem> productCarts)
         {
             try
             {
@@ -66,8 +81,8 @@ namespace MomAndChildren.Business
 
                 foreach(var productCart in productCarts)
                 {
-                    totalPrice += productCart.UnitPrice * productCart.QuantityCart;
-                    totalQuantity += productCart.QuantityCart;
+                    totalPrice += productCart.Product.Price * productCart.Quantity;
+                    totalQuantity += productCart.Quantity;
                 }
 
                 var order = new Order()
@@ -79,8 +94,8 @@ namespace MomAndChildren.Business
                     OrderDetails = productCarts.Select(p => new OrderDetail()
                     {
                         ProductId = p.Product.ProductId,
-                        Quantity = p.QuantityCart,
-                        UnitPrice = p.UnitPrice
+                        Quantity = p.Quantity,
+                        UnitPrice = p.Product.Price
                     }).ToList()
                 };
 

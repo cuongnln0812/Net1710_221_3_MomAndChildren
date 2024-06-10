@@ -22,7 +22,10 @@ namespace MomAndChildren.Data
 
         private BrandRepository _brand;
 
-        public UnitOfWork() { }
+        public UnitOfWork() 
+        {
+            _unitOfWorkContext = new Net1710_221_3_MomAndChildrenContext();
+        }
 
         public OrderDetailRepository OrderDetailRepository
         {
@@ -41,6 +44,22 @@ namespace MomAndChildren.Data
         public BrandRepository BrandRepository
         {
             get { return _brand ??= new Repositories.BrandRepository(); }
+        }
+
+        public PaymentHistoryRepository PaymentHistoryRepository
+        {
+            get
+            {
+                return _paymentHistory ??= new Repositories.PaymentHistoryRepository();
+            }
+        }
+
+        public OrderRepository OrderRepository
+        {
+            get
+            {
+                return _order ??= new Repositories.OrderRepository();
+            }
         }
 
         ////TO-DO CODE HERE/////////////////
@@ -105,21 +124,7 @@ namespace MomAndChildren.Data
             return result;
         }
 
-        public PaymentHistoryRepository PaymentHistoryRepository
-        {
-            get
-            {
-                return _paymentHistory ??= new Repositories.PaymentHistoryRepository();
-            }
-        }
-
-        public OrderRepository OrderRepository 
-        { 
-            get
-            { 
-                return _order ??= new Repositories.OrderRepository(); 
-            }
-        }
+        
 
         #endregion
     }

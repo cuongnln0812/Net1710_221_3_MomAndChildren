@@ -221,5 +221,10 @@ namespace MomAndChildren.Business
                 return new MomAndChildrenResult(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
+
+        public async Task GetCategoryByIdAsync(string text)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

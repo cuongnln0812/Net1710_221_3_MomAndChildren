@@ -71,7 +71,7 @@ namespace MomAndChildren.Business
         public async Task<IMomAndChildrenResult> GetProductsAsync()
         {
             List<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
-            return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG);
+            return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, products);
         }
 
         public bool ProductExists(int id)
