@@ -34,6 +34,7 @@
                     <Label Grid.Row="3" Grid.Column="0" Content="Quantity" VerticalAlignment="Center"/>
                     <xctk:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="txtQuantity" Value="{Binding Path=Quantity, Mode=TwoWay}" Margin="5" Minimum="0" />
 
+                    
                 </Grid>
             </GroupBox>
             <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -43,6 +44,7 @@
             <StackPanel Height="210">
                 <DataGrid x:Name="grdOrderDetails" AutoGenerateColumns="False" ItemsSource="{Binding OrderDetails}" CanUserAddRows="False" Height="200" Margin="10" MouseDoubleClick="grdOrderDetail_MouseDouble_Click" SelectionMode="Single" SelectionUnit="FullRow">
                     <DataGrid.Columns>
+                        <!--<DataGridTextColumn Header="Code" Binding="{Binding Path=Id}" Visibility="Hidden"/>-->
                         <DataGridTextColumn Header="Order Detail ID" Binding="{Binding Path=OrderDetailId}" Width="100" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Order ID" Binding="{Binding Path=OrderId}" Width="100" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Product ID" Binding="{Binding Path=ProductId}" Width="100" IsReadOnly="True"/>
@@ -55,6 +57,17 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+
+                        <!--<DataGridTemplateColumn Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" x:Name="ButtonDelete" CommandParameter="{Binding Path=Id}"
+                                Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor,
+                                        AncestorType=Window}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

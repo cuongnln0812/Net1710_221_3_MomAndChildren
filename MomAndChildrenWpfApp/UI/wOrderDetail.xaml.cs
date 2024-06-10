@@ -31,6 +31,7 @@ namespace MomAndChildrenWpfApp.UI
         public List<Order> Orders { get; set; }
         public List<Product> Products { get; set; }
 
+
         public wOrderDetail()
         {
             InitializeComponent();
@@ -71,14 +72,14 @@ namespace MomAndChildrenWpfApp.UI
                     {
                         int orderId = int.Parse(cmbOrderId.Text);
 
-                        List<CartItem> cartItems = new List<CartItem>();
+                    List<CartItem> cartItems = new List<CartItem>();
 
-                        var product = _unitOfWork.ProductRepository.GetById(1);
+                    var product = _unitOfWork.ProductRepository.GetById(1);
 
                         cartItems.Add(new CartItem { ProductId = int.Parse(cmbProductId.Text), Product = product, Quantity = int.Parse(txtQuantity.Text) });
 
-                        var result = await _orderDetailBusiness.CreateOrderDetail(orderId, cartItems);
-                        MessageBox.Show(result.Message, "Save");
+                    var result = await _orderDetailBusiness.CreateOrderDetail(orderId, cartItems);
+                    MessageBox.Show(result.Message, "Save");
                         cmbProductId.IsEnabled = true;
                         cmbOrderId.IsEnabled = true;
                     }                   

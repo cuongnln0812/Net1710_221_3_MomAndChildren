@@ -69,8 +69,8 @@ namespace MomAndChildren.RazorWebApp.Pages
 
         public IActionResult OnPostAddToCart()
         {
-                _cartService.AddProductToCart(ProductId, Quantity);
-                return RedirectToPage();
+            _cartService.AddProductToCart(ProductId, Quantity);
+            return RedirectToPage();
             
         }
 
