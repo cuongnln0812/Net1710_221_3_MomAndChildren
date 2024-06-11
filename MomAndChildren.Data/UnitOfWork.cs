@@ -20,6 +20,8 @@ namespace MomAndChildren.Data
 
         private ProductRepository _product;
 
+        private CustomerRepository _customer;
+
         public UnitOfWork()
         {
             _unitOfWorkContext ??= new Net1710_221_3_MomAndChildrenContext();
@@ -30,6 +32,14 @@ namespace MomAndChildren.Data
             get
             {
                 return _order ??= new Repository.OrderRepository(_unitOfWorkContext);
+            }
+        }
+
+        public CustomerRepository CustomerRepository
+        {
+            get
+            {
+                return _customer ??= new Repository.CustomerRepository(_unitOfWorkContext);
             }
         }
 

@@ -1,54 +1,50 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MomAndChildren.Common;
-using MomAndChildren.Data;
-using MomAndChildren.Data.DAO;
+﻿using MomAndChildren.Common;
 using MomAndChildren.Data.Models;
-using MomAndChildren.Data.Models.DTO;
+using MomAndChildren.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MomAndChildren.Business
 {
-    public interface IOrderBusiness
+    public interface ICustomerBusiness
     {
         //Task<IMomAndChildrenResult> CreateOrder(int customerId, List<ProductCart> productCarts);
-        Task<IMomAndChildrenResult> CreateOrder(Order order);
-        Task<IMomAndChildrenResult> UpdateOrder(Order order);
-        Task<IMomAndChildrenResult> DeleteOrder(int? orderId);
+        Task<IMomAndChildrenResult> CreateCustomer(Customer customer);
+        Task<IMomAndChildrenResult> UpdateCustomer(Customer customer);
+        Task<IMomAndChildrenResult> DeleteCustomer(int customerId);
 
-        Task<IMomAndChildrenResult> GetOrderByIdAsync(int? orderId);
-        Task<IMomAndChildrenResult> GetOrdersAsync();
+        Task<IMomAndChildrenResult> GetCustomerByIdAsync(int customerId);
+        Task<IMomAndChildrenResult> GetCustomersAsync();
     }
 
-    public class OrderBusiness : IOrderBusiness
+    public class CustomerBusiness : ICustomerBusiness
     {
 
         //private readonly OrderDAO _DAO;
 
         private readonly UnitOfWork _unitOfWork;
-        public OrderBusiness()
+        public CustomerBusiness()
         {
             //_DAO = new OrderDAO();
             _unitOfWork ??= new UnitOfWork();
         }
 
-        public async Task<IMomAndChildrenResult> GetOrdersAsync()
+        public async Task<IMomAndChildrenResult> GetCustomersAsync()
         {
             try
             {
-                var categories = await _unitOfWork.OrderRepository.GetAllAsync();
+                var customers = await _unitOfWork.CustomerRepository.GetAllAsync();
 
-                if (categories == null)
+                if (customers == null)
                 {
                     return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.FAIL_READ_MSG);
                 }
                 else
                 {
-                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, categories);
+                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, customers);
                 }
             }
             catch (Exception ex)
@@ -108,7 +104,7 @@ namespace MomAndChildren.Business
 
 
 
-        public async Task<IMomAndChildrenResult> CreateOrder(Order order)
+        public async Task<IMomAndChildrenResult> CreateCustomer(Customer customer)
         {
             try
             {
@@ -124,7 +120,7 @@ namespace MomAndChildren.Business
                 //    }
                 //}
 
-                int result = await _unitOfWork.OrderRepository.CreateAsync(order);
+                int result = await _unitOfWork.CustomerRepository.CreateAsync(customer);
 
                 if (result > 0)
                 {
@@ -143,18 +139,18 @@ namespace MomAndChildren.Business
         }
 
 
-        public async Task<IMomAndChildrenResult> GetOrderByIdAsync(int? orderId)
+        public async Task<IMomAndChildrenResult> GetCustomerByIdAsync(int customerId)
         {
             try
             {
-                var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
-                if (order == null)
+                var customer = await _unitOfWork.CustomerRepository.GetByIdAsync(customerId);
+                if (customer == null)
                 {
                     return new MomAndChildrenResult(Const.FAIL_READ_CODE, Const.FAIL_READ_MSG);
                 }
                 else
                 {
-                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, order);
+                    return new MomAndChildrenResult(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, customer);
                 }
             }
             catch (Exception ex)
@@ -163,18 +159,20 @@ namespace MomAndChildren.Business
             }
         }
 
-        public async Task<IMomAndChildrenResult> UpdateOrder(Order order)
+        public async Task<IMomAndChildrenResult> UpdateCustomer(Customer customer)
         {
             try
             {
-                var newOrder = await _unitOfWork.OrderRepository.GetByIdAsync(order.OrderId);
-                if (newOrder != null)
+                var newCustomer = await _unitOfWork.CustomerRepository.GetByIdAsync(customer.CustomerId);
+                if (newCustomer != null)
                 {
-                    newOrder.OrderDate = order.OrderDate;
-                    newOrder.TotalPrice = order.TotalPrice;
-                    newOrder.TotalQuantity = order.TotalQuantity;
+                    newCustomer.Name = customer.Name;
+                    newCustomer.Address = customer.Address;
+                    newCustomer.PhoneNumber = customer.PhoneNumber;
+                    newCustomer.Dob = customer.Dob;
+                    newCustomer.Gender = customer.Gender;
                     //newCategory.Status = category.Status;
-                    int result = await _unitOfWork.OrderRepository.UpdateAsync(newOrder);
+                    int result = await _unitOfWork.CustomerRepository.UpdateAsync(newCustomer);
                     if (result > 0)
                     {
                         return new MomAndChildrenResult(Const.SUCCESS_UPDATE_CODE, Const.SUCCESS_UPDATE_MSG);
@@ -195,12 +193,12 @@ namespace MomAndChildren.Business
             }
         }
 
-        public async Task<IMomAndChildrenResult> DeleteOrder(int? orderId)
+        public async Task<IMomAndChildrenResult> DeleteCustomer(int customerId)
         {
             try
             {
-                var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
-                if (order != null)
+                var customer = await _unitOfWork.CustomerRepository.GetByIdAsync(customerId);
+                if (customer != null)
                 {
                     ////xem bang product co category muon xóa ko, có -> thì ko cho xóa; ko có -> chuyển status
                     //var orders = await _unitOfWork.OrderRepository.GetAllAsync();
@@ -212,7 +210,7 @@ namespace MomAndChildren.Business
                     //    }
                     //}
 
-                    bool result = await _unitOfWork.OrderRepository.RemoveAsync(order);
+                    bool result = await _unitOfWork.CustomerRepository.RemoveAsync(customer);
                     if (result)
                     {
                         return new MomAndChildrenResult(Const.SUCCESS_DELETE_CODE, Const.SUCCESS_DELETE_MSG);
