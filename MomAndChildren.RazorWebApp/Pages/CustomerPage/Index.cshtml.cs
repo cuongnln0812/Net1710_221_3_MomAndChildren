@@ -5,26 +5,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using MomAndChildren.Business;
 using MomAndChildren.Data.Models;
 
 namespace MomAndChildren.RazorWebApp.Pages.CustomerPage
 {
     public class IndexModel : PageModel
     {
-        private readonly MomAndChildren.Data.Models.Net1710_221_3_MomAndChildrenContext _context;
 
-        public IndexModel(MomAndChildren.Data.Models.Net1710_221_3_MomAndChildrenContext context)
+        private readonly ICustomerBusiness business;
+        //private readonly ICustomerBusiness customer;
+
+        public IndexModel()
         {
-            _context = context;
+            business ??= new CustomerBusiness();
+            //customer ??= new CustomerBusiness();
         }
 
-        public IList<Customer> Customer { get;set; } = default!;
+        public IList<Customer> Customers { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Customers != null)
+            var result = await business.GetCustomersAsync();
+            if (result != null && result.Status > 0 && result.Data != null)
             {
-                Customer = await _context.Customers.ToListAsync();
+                Customers = result.Data as List<Customer>;
             }
         }
     }

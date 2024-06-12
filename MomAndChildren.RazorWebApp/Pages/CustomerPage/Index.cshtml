@@ -14,25 +14,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].Name)
+                @Html.DisplayNameFor(model => model.Customers[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].Address)
+                @Html.DisplayNameFor(model => model.Customers[0].Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].PhoneNumber)
+                @Html.DisplayNameFor(model => model.Customers[0].PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].Dob)
+                @Html.DisplayNameFor(model => model.Customers[0].Dob)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].Gender)
+                @Html.DisplayNameFor(model => model.Customers[0].Gender)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Customer) {
+@foreach (var item in Model.Customers) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
